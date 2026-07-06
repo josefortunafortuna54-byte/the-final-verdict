@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Auth obrigatório para writes
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    // Campos obrigatórios em criações
+    function hasRequiredFields(fields) {
+      return fields.keys().hasAll(["created_at"]);
+    }
+
+    // BATALHAS
+    match /battles/{battleId} {
+      allow read: if true;
+      allow create: if isAuth() && request.resource.data.keys().hasAll(["gladiator_a_name", "gladiator_b_name", "status", "current_round"]);
+      allow update: if isAuth() && request.resource.data.diff(resource.data).affectedKeys().hasAny(["status", "current_round", "winner", "gladiator_a_energy", "gladiator_b_energy", "gladiator_a_name", "gladiator_b_name", "gladiator_a_avatar", "gladiator_b_avatar", "updated_at"]);
+      allow delete: if false;
+    }
+
+    // REAÇÕES — apenas emojis válidos
+    match /reactions/{reactionId} {
+      allow read: if true;
+      allow create: if isAuth()
+        && request.resource.data.keys().hasAll(["battle_id", "emoji", "round"])
+        && request.resource.data.emoji in ["🔥", "❤️", "⚡"];
+      allow update, delete: if false;
+    }
+
+    // VOTOS — apenas lados válidos
+    match /votes/{voteId} {
+      allow read: if true;
+      allow create: if isAuth()
+        && request.resource.data.keys().hasAll(["battle_id", "side"])
+        && request.resource.data.side in ["a", "b"];
+      allow update, delete: if false;
+    }
+
+    // HISTÓRICO DE BATALHAS
+    match /battle_history/{historyId} {
+      allow read: if true;
+      allow create: if isAuth() && request.resource.data.keys().hasAll(["winner", "gladiator_a_name", "gladiator_b_name"]);
+      allow update, delete: if false;
+    }
+
+    // GLADIADORES
+    match /gladiators/{gladiatorId} {
+      allow read: if true;
+      allow create: if isAuth() && request.resource.data.keys().hasAll(["name"]);
+      allow update: if isAuth() && request.resource.data.diff(resource.data).affectedKeys().hasAny(["name", "alias", "avatarUrl", "wins", "losses", "totalReactions", "updatedAt"]);
+      allow delete: if isAuth() && request.resource == null;
+    }
+  }
+}

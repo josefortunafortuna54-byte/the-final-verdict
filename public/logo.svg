@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="60%" r="50%">
+      <stop offset="0%" stop-color="#1a0000"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <radialGradient id="flameCore" cx="50%" cy="80%" r="60%">
+      <stop offset="0%" stop-color="#ff6b00"/>
+      <stop offset="40%" stop-color="#cc1100"/>
+      <stop offset="100%" stop-color="#660000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="flameInner" cx="50%" cy="70%" r="50%">
+      <stop offset="0%" stop-color="#ffdd00"/>
+      <stop offset="50%" stop-color="#ff4400"/>
+      <stop offset="100%" stop-color="#cc0000" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="micBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#e0e0e0"/>
+      <stop offset="100%" stop-color="#999999"/>
+    </linearGradient>
+    <linearGradient id="micShine" x1="0%" y1="0%" x2="60%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="flameGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="circle">
+      <circle cx="256" cy="256" r="240"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <circle cx="256" cy="256" r="256" fill="#000000"/>
+  <circle cx="256" cy="256" r="240" fill="url(#bgGlow)"/>
+
+  <!-- Outer ring -->
+  <circle cx="256" cy="256" r="238" fill="none" stroke="#cc1100" stroke-width="3" opacity="0.6"/>
+  <circle cx="256" cy="256" r="232" fill="none" stroke="#ff2200" stroke-width="1" opacity="0.3"/>
+
+  <!-- Flames — outer layer -->
+  <g filter="url(#flameGlow)" clip-path="url(#circle)">
+    <!-- Far left flame -->
+    <path d="M 130 420 C 110 380 100 340 120 300 C 130 280 125 260 115 245 C 135 265 145 285 140 310 C 155 280 150 250 140 225 C 165 255 170 290 160 320 C 175 295 175 265 168 240 C 190 270 192 305 180 335 C 195 310 198 280 192 255 C 210 285 208 320 195 350 C 205 330 207 305 200 285 C 215 308 215 338 205 365 C 210 345 213 322 208 305 C 220 325 222 352 215 378 C 215 395 212 410 205 420 Z"
+      fill="url(#flameCore)" opacity="0.7"/>
+
+    <!-- Far right flame -->
+    <path d="M 382 420 C 402 380 412 340 392 300 C 382 280 387 260 397 245 C 377 265 367 285 372 310 C 357 280 362 250 372 225 C 347 255 342 290 352 320 C 337 295 337 265 344 240 C 322 270 320 305 332 335 C 317 310 314 280 320 255 C 302 285 304 320 317 350 C 307 330 305 305 312 285 C 297 308 297 338 307 365 C 302 345 299 322 304 305 C 292 325 290 352 297 378 C 297 395 300 410 307 420 Z"
+      fill="url(#flameCore)" opacity="0.7"/>
+
+    <!-- Main centre flame — large -->
+    <path d="M 256 430 C 210 395 185 350 195 295 C 205 260 195 230 178 205 C 208 235 220 265 212 300 C 225 258 220 218 205 185 C 235 220 242 265 232 305 C 248 265 246 220 234 188 C 262 225 268 272 255 315 C 272 272 272 225 260 190 C 290 228 294 278 278 320 C 295 278 296 228 284 192 C 314 232 316 285 298 328 C 312 290 314 245 305 210 C 328 248 328 300 310 340 C 318 308 320 272 314 242 C 334 275 335 318 320 352 C 326 325 328 295 324 270 C 340 300 340 338 328 368 C 327 390 322 412 314 430 Z"
+      fill="url(#flameCore)" opacity="0.85"/>
+
+    <!-- Inner bright flame -->
+    <path d="M 256 415 C 225 385 210 348 220 305 C 228 278 222 255 210 238 C 232 258 240 282 235 310 C 245 280 243 252 234 230 C 254 255 258 286 250 315 C 260 285 260 256 252 232 C 272 258 274 290 264 318 C 274 290 275 260 268 236 C 286 262 287 296 276 325 C 283 300 284 272 278 250 C 293 274 294 306 284 332 C 289 312 291 289 287 270 C 299 292 299 322 290 348 C 291 368 288 390 282 415 Z"
+      fill="url(#flameInner)" opacity="0.9"/>
+
+    <!-- Tip of flame — hottest white-yellow -->
+    <path d="M 256 320 C 245 300 242 278 248 258 C 252 268 254 280 252 292 C 256 278 256 262 252 248 C 260 260 262 276 258 292 C 262 278 263 262 259 248 C 267 262 268 280 264 296 C 267 280 268 262 265 248 C 272 264 272 282 267 300 C 268 285 270 270 268 258 C 274 272 274 290 270 308 Z"
+      fill="#ffff88" opacity="0.95"/>
+  </g>
+
+  <!-- Microphone stand arm -->
+  <line x1="256" y1="360" x2="256" y2="410" stroke="#cccccc" stroke-width="12" stroke-linecap="round"/>
+  <!-- Stand base -->
+  <path d="M 200 418 Q 256 405 312 418" stroke="#cccccc" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Stand base feet -->
+  <line x1="200" y1="418" x2="185" y2="430" stroke="#cccccc" stroke-width="8" stroke-linecap="round"/>
+  <line x1="312" y1="418" x2="327" y2="430" stroke="#cccccc" stroke-width="8" stroke-linecap="round"/>
+  <line x1="256" y1="405" x2="256" y2="430" stroke="#cccccc" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Microphone arm -->
+  <line x1="256" y1="360" x2="190" y2="310" stroke="#aaaaaa" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Microphone body — main capsule -->
+  <rect x="215" y="145" width="82" height="145" rx="41" ry="41" fill="url(#micBody)" filter="url(#softGlow)"/>
+
+  <!-- Mic grille lines -->
+  <g stroke="#888888" stroke-width="1.5" opacity="0.5">
+    <line x1="215" y1="200" x2="297" y2="200"/>
+    <line x1="215" y1="215" x2="297" y2="215"/>
+    <line x1="215" y1="230" x2="297" y2="230"/>
+    <line x1="215" y1="245" x2="297" y2="245"/>
+    <line x1="215" y1="260" x2="297" y2="260"/>
+    <line x1="217" y1="275" x2="295" y2="275"/>
+  </g>
+  <!-- Grille vertical lines -->
+  <g stroke="#888888" stroke-width="1.5" opacity="0.3">
+    <line x1="235" y1="148" x2="235" y2="288"/>
+    <line x1="256" y1="145" x2="256" y2="290"/>
+    <line x1="277" y1="148" x2="277" y2="288"/>
+  </g>
+
+  <!-- Mic shine/reflection -->
+  <rect x="222" y="155" width="28" height="100" rx="14" fill="url(#micShine)" opacity="0.4"/>
+
+  <!-- Red accent ring on mic -->
+  <rect x="213" y="288" width="86" height="14" rx="7" fill="#cc1100" filter="url(#glow)"/>
+  <rect x="213" y="305" width="86" height="10" rx="5" fill="#333333"/>
+
+  <!-- Mic handle -->
+  <rect x="226" y="315" width="60" height="50" rx="10" fill="url(#micBody)"/>
+  <rect x="226" y="315" width="60" height="4" rx="2" fill="#aaaaaa"/>
+  <rect x="226" y="358" width="60" height="4" rx="2" fill="#aaaaaa"/>
+
+  <!-- Handle grip lines -->
+  <g stroke="#999999" stroke-width="2" opacity="0.4">
+    <line x1="228" y1="330" x2="284" y2="330"/>
+    <line x1="228" y1="340" x2="284" y2="340"/>
+    <line x1="228" y1="350" x2="284" y2="350"/>
+  </g>
+
+  <!-- Glow halo around mic from flames -->
+  <rect x="210" y="140" width="92" height="155" rx="46" fill="none" stroke="#ff4400" stroke-width="2" opacity="0.4" filter="url(#glow)"/>
+
+  <!-- Corner decorations -->
+  <line x1="20" y1="50" x2="50" y2="20" stroke="#cc1100" stroke-width="2" opacity="0.5"/>
+  <line x1="462" y1="50" x2="492" y2="20" stroke="#cc1100" stroke-width="2" opacity="0.5"/>
+  <line x1="20" y1="462" x2="50" y2="492" stroke="#cc1100" stroke-width="2" opacity="0.5"/>
+  <line x1="462" y1="462" x2="492" y2="492" stroke="#cc1100" stroke-width="2" opacity="0.5"/>
+</svg>
